@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offline Notes Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ☰ MENU BUTTON -->
+    <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()">☰</button>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="sidebar">
+
+        <div class="sidebar-header">
+            <span class="back-arrow" onclick="toggleSidebar()">←</span>
+            <div class="logo">📒</div>
+            <h3>Offline Note Manager</h3>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li onclick="showTags()">🏷 Tags</li>
+            <div id="sidebarTags"></div>
+
+            <li id="notesMenu" onclick="toggleSidebarNotes()">
+                📝 Notes (<span id="noteCount">0</span>)
+            </li>
+        </ul>
+
+        <!-- NOTES LIST -->
+        <div id="sidebarNotes"></div>
+
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+
+        <div class="header">
+            <h2 class="app-title">📒 My Notes</h2>
+
+            <div class="top-bar">
+                <input id="searchBox"
+                       class="search-input"
+                       placeholder="Search notes..."
+                       oninput="searchNotes()" />
+
+                <select id="sortBox" class="sort-box" onchange="sortNotes()">
+                    <option value="new">Newest</option>
+                    <option value="old">Oldest</option>
+                    <option value="modified">Last Modified</option>
+                </select>
+
+                <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+                <button class="icon-btn" onclick="exportNotes()">⬇</button>
+            </div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState">
+            <p>No Notes Yet</p>
+            <span>Create your first note</span>
+        </div>
+
+        <!-- NOTES GRID -->
+        <div id="notesGrid"></div>
+
+        <!-- ADD BUTTON -->
+        <button class="add-btn" onclick="openEditor()">+</button>
+
+    </div>
+
+    <!-- EDITOR MODAL -->
+    <div id="editorPage" class="editor-overlay">
+
+        <div class="editor-box">
+
+            <button class="back-btn" onclick="goBack()">←</button>
+
+            <input id="title" placeholder="Title..." />
+            <textarea id="content" placeholder="Write your note..."></textarea>
+            <input id="tags" placeholder="Tags (comma separated)" />
+
+            <div class="actions">
+                <button onclick="saveNote()">Save</button>
+                <button onclick="deleteNote()">Delete</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
